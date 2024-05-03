@@ -7,18 +7,12 @@ import CollapsibleSection from './components/CollapsibleSection';
 
 
 const App = () => {
-  const [isGeneralInfoCollapsed, setGeneralInfoCollapsed] = useState(false);
   const [isEducationalInfoCollapsed, setEducationalInfoCollapsed] = useState(false);
   const [isPracticalInfoCollapsed, setPracticalInfoCollapsed] = useState(false);
 
   return (
     <div className='container'>
-      <CollapsibleSection
-        title="General Information"
-        content={GeneralInformation}
-        isCollapsed={isGeneralInfoCollapsed}
-        toggleCollapse={() => setGeneralInfoCollapsed(!isGeneralInfoCollapsed)}
-      />
+      <GeneralInformation />
       <CollapsibleSection
         title="Educational Information"
         content={EducationalInformation}
@@ -31,7 +25,7 @@ const App = () => {
         isCollapsed={isPracticalInfoCollapsed}
         toggleCollapse={() => setPracticalInfoCollapsed(!isPracticalInfoCollapsed)}
       />
-      
+
     </div>
 
     
