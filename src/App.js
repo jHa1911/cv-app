@@ -1,24 +1,41 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useState } from 'react';
+import GeneralInformation from './components/GeneralInformation';
+import EducationalInformation from './components/EducationalInformation';
+import PracticalInformation from './components/PracticalInformation';
+import CollapsibleSection from './components/CollapsibleSection';
 
-function App() {
+
+const App = () => {
+  const [isGeneralInfoCollapsed, setGeneralInfoCollapsed] = useState(false);
+  const [isEducationalInfoCollapsed, setEducationalInfoCollapsed] = useState(false);
+  const [isPracticalInfoCollapsed, setPracticalInfoCollapsed] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='container'>
+      <CollapsibleSection
+        title="General Information"
+        content={GeneralInformation}
+        isCollapsed={isGeneralInfoCollapsed}
+        toggleCollapse={() => setGeneralInfoCollapsed(!isGeneralInfoCollapsed)}
+      />
+      <CollapsibleSection
+        title="Educational Information"
+        content={EducationalInformation}
+        isCollapsed={isEducationalInfoCollapsed}
+        toggleCollapse={() => setEducationalInfoCollapsed(!isEducationalInfoCollapsed)}
+      />
+      <CollapsibleSection
+        title="Practical Information"
+        content={PracticalInformation}
+        isCollapsed={isPracticalInfoCollapsed}
+        toggleCollapse={() => setPracticalInfoCollapsed(!isPracticalInfoCollapsed)}
+      />
+      
     </div>
+
+    
+    
   );
 }
 
