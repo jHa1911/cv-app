@@ -14,6 +14,7 @@ function InputGroup({
     return (
         <div>
             <label htmlFor={id}>{label}</label>
+            <br />
             <input
                 id={id}
                 type={type}

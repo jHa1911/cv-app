@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import InputGroup from './InputGroup'
+import CollapsibleSection from './CollapsibleSection';
 
 function GeneralInformation() {
     const [personalInfo, setPersonalInfo] = useState({
@@ -7,35 +8,58 @@ function GeneralInformation() {
         email: '',
         phone: ''
     });
+
+    const [isCollapsed, setIsCollapsed] = useState(false)
+
     function handleChange(e) {
         setPersonalInfo({ ...personalInfo, [e.target.id]: e.target.value });
     };
 
+    function toggleCollapse() {
+        setIsCollapsed(!isCollapsed)
+    }
+
 
     return (
-        <div>
-            <InputGroup 
-                id="fullname"
-                label="Full Name"
-                type="text"
-                placeholder="Enter your name"
-                onChange={handleChange}
-                value={personalInfo.fullname}
+        <div className='personal-info'>
+            <CollapsibleSection
+                title="Personal Details"
+                isCollapsed={isCollapsed}
+                toggleCollapse={toggleCollapse}  
             />
-            <InputGroup
-                id="email"
-                label="Email"
-                type="email"
-                placeholder="Enter your email"
-                onChange={handleChange}
-            />
-            <InputGroup 
-                id="phone"
-                label="Phone"
-                type="tel"
-                placeholder="Enter your phone number"
-                onChange={handleChange}
-            />
+            {
+                !isCollapsed && (
+                    <div>
+                        <InputGroup
+                            id="fullname"
+                            label="Full Name"
+                            type="text"
+                            value={personalInfo.fullname}
+                            onChange={handleChange}
+                            placeholder="Full Name"
+                            required
+                        />
+                        <InputGroup
+                            id="email"
+                            label="Email"
+                            type="email"
+                            value={personalInfo.email}
+                            onChange={handleChange}
+                            placeholder="Email"
+                            required
+                        />
+                        <InputGroup
+                            id="phone"
+                            label="Phone"
+                            type="tel"
+                            value={personalInfo.phone}
+                            onChange={handleChange}
+                            placeholder="Phone"
+                            required
+                        />
+                    </div>
+                )
+            }
 
             <div className="personaldetails">
                 <h2>Personal Details</h2>
