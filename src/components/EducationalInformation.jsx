@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import InputGroup from './InputGroup';
+import CollapsibleSection from './CollapsibleSection';
 
 function EducationalInformation() {
 
@@ -8,6 +9,8 @@ function EducationalInformation() {
     const [educationData, setEducationData] = useState(
         { school: "", degree: "", graduationdate: "" }
     );
+
+    const [isCollapsed, setIsCollapsed] = useState(false);
 
     const [isEducation, setIsEducation] = useState(true);
 
@@ -34,47 +37,72 @@ function EducationalInformation() {
     }
 
     function addEducation() {
-        setIsEducation(true)
+        setIsEducation(false)
     }
+
+    function toggleCollapse() {
+        setIsCollapsed(!isCollapsed)
+    } 
 
 
 
     return (
         <div>
-            <h1>education</h1>
+            <CollapsibleSection
+                title="Educational"
+                isCollapsed={isCollapsed}
+                toggleCollapse={toggleCollapse}
+            />
             {
-                isEducation && (
-                    <div>
-                        <InputGroup 
-                            id="school"
-                            label="School"
-                            type="text"
-                            value={educationData.school}
-                            onChange={handleInputChange}
-                            placeholder="Enter School"
-                            required
-                        />
-                        <InputGroup 
-                            id="degree"
-                            label="Degree"
-                            type="text"
-                            value={educationData.degree}
-                            onChange={handleInputChange}
-                            placeholder="Enter Degree"
-                            required
-                        />
-                        <InputGroup  
-                            id="date"
-                            label="Graduation Date"
-                            type="date"
-                            value={educationData.graduationDate}
-                            onChange={handleInputChange}
-                        />
-                        <button onClick={handleSubmit}>Submit</button>
+                isCollapsed && (
+                    <div className="education-list">
+                        {
+                            isEducation ? (
+                                <>
+                                    <ul>
+                                        <li>s</li>
+                                        <li>s</li>
+                                        <li>s</li>
+                                        <li>s</li>
+                                        <li>s</li>
+                                    </ul>
+                                    <button onClick={addEducation}>Add Education</button>
+                                </>
+                            ) : (
+                                <div>
+                                    <InputGroup
+                                        id="school"
+                                        label="School"
+                                        type="text"
+                                        value={educationData.school}
+                                        onChange={handleInputChange}
+                                        placeholder="Enter School"
+                                        required
+                                    />
+                                    <InputGroup
+                                        id="degree"
+                                        label="Degree"
+                                        type="text"
+                                        value={educationData.degree}
+                                        onChange={handleInputChange}
+                                        placeholder="Enter Degree"
+                                        required
+                                    />
+                                    <InputGroup
+                                        id="date"
+                                        label="Graduation Date"
+                                        type="date"
+                                        value={educationData.graduationDate}
+                                        onChange={handleInputChange}
+                                    />
+                                    <button onClick={handleSubmit}>Submit</button>
+                                </div>
+                            )
+                        }
                     </div>
                 )
             }
-            <button onClick={addEducation}>Add Education</button>
+            
         </div>
     )
 }
