@@ -10,8 +10,10 @@ function DispalyList({educationList, educationData}) {
                             <p>School: {education.school}</p>
                             <p>Degree: {education.degree}</p>
                             <p>Graduation Date: {education.graduationDate}</p>
+                            <ion-icon name="create-outline"></ion-icon>
                         </li>
                     ))
+                    
                 }
             </ul>
         </div>
