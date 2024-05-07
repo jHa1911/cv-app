@@ -59,11 +59,11 @@ function PracticalInformation() {
                             isExperience ? (
                                 <>
                                     <ul>
-                                        <li>s</li>
-                                        <li>s</li>
-                                        <li>s</li>
-                                        <li>s</li>
-                                        <li>s</li>
+                                        {experienceList.map((experienceData, index) => (
+                                            <li key={index}>
+                                                {experienceData.company}
+                                            </li>
+                                        ))}
                                     </ul>
                                     <button className='submit-btn' onClick={addExperience}><span><ion-icon name="add-outline"></ion-icon></span> Experience</button>
                                 </>

@@ -10,7 +10,9 @@ const App = () => {
     <div className='container-box'>
       <div className='edit-container'>
       <GeneralInformation />
+      <hr />
       <EducationalInformation />
+      <hr />
       <PracticalInformation />
       </div>
       <div className='resume-container'>

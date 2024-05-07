@@ -60,14 +60,6 @@ function GeneralInformation() {
                     </div>
                 )
             }
-
-            <div className="personaldetails">
-                <h2>Personal Details</h2>
-                <p>Full Name: {personalInfo.fullname}</p>
-                <p>Email: {personalInfo.email}</p>
-                <p>Phone: {personalInfo.phone}</p>
-            </div>
-
         </div>
     )
 }

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import InputGroup from './InputGroup';
 import CollapsibleSection from './CollapsibleSection';
 import './educationalInformation.css'
+import DispalyList from './DispalyList';
 
 function EducationalInformation() {
 
@@ -50,7 +51,7 @@ function EducationalInformation() {
     return (
         <div>
             <CollapsibleSection
-                title="Educational"
+                title="Education"
                 isCollapsed={isCollapsed}
                 toggleCollapse={toggleCollapse}
             />
@@ -60,13 +61,10 @@ function EducationalInformation() {
                         {
                             isEducation ? (
                                 <>
-                                    <ul>
-                                        <li>s</li>
-                                        <li>s</li>
-                                        <li>s</li>
-                                        <li>s</li>
-                                        <li>s</li>
-                                    </ul>
+                                    <DispalyList
+                                        educationList={educationList}
+                                        educationData={educationData} 
+                                    />
                                     <button className='submit-btn' onClick={addEducation}><span><ion-icon name="add-outline"></ion-icon></span>  Education</button>
                                 </>
                             ) : (
