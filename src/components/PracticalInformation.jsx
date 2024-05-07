@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import InputGroup from './InputGroup'
 import CollapsibleSection from './CollapsibleSection'
+import './practicalInformation.css'
 
 function PracticalInformation() {
     const [experienceData, setExperienceData] = useState({
@@ -64,7 +65,7 @@ function PracticalInformation() {
                                         <li>s</li>
                                         <li>s</li>
                                     </ul>
-                                    <button onClick={addExperience}>Add Experience</button>
+                                    <button className='submit-btn' onClick={addExperience}><span><ion-icon name="add-outline"></ion-icon></span> Experience</button>
                                 </>
                             ) : (
                                 <div>
@@ -101,7 +102,7 @@ function PracticalInformation() {
                                         onChange={handleInputChange}
                                         optional
                                     />
-                                    <button onClick={handleSubmit}>Submit</button>
+                                    <button className='btn btn-outline-primary' onClick={handleSubmit}>Submit</button>
                                 </div>
                             )
                         }

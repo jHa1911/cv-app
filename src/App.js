@@ -7,7 +7,7 @@ import PracticalInformation from './components/PracticalInformation';
 const App = () => {
 
   return (
-    <div className='container'>
+    <div className='container-box'>
       <div className='edit-container'>
       <GeneralInformation />
       <EducationalInformation />

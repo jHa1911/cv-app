@@ -12,11 +12,12 @@ function InputGroup({
 
 {
     return (
-        <div>
-            <label htmlFor={id}>{label}</label>
+        <div className='mb-3'>
+            <label htmlFor={id} className='form-label'>{label}</label>
             <br />
             <input
                 id={id}
+                className='form-control'
                 type={type}
                 value={value}
                 onChange={onChange}

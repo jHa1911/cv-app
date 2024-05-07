@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import InputGroup from './InputGroup';
 import CollapsibleSection from './CollapsibleSection';
+import './educationalInformation.css'
 
 function EducationalInformation() {
 
@@ -66,7 +67,7 @@ function EducationalInformation() {
                                         <li>s</li>
                                         <li>s</li>
                                     </ul>
-                                    <button onClick={addEducation}>Add Education</button>
+                                    <button className='submit-btn' onClick={addEducation}><span><ion-icon name="add-outline"></ion-icon></span>  Education</button>
                                 </>
                             ) : (
                                 <div>
@@ -95,7 +96,7 @@ function EducationalInformation() {
                                         value={educationData.graduationDate}
                                         onChange={handleInputChange}
                                     />
-                                    <button onClick={handleSubmit}>Submit</button>
+                                    <button className='btn btn-outline-primary' onClick={handleSubmit}>Submit</button>
                                 </div>
                             )
                         }
