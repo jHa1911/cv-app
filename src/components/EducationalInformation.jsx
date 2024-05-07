@@ -1,74 +1,81 @@
-import React from 'react'
-import { useState } from 'react'
-import InputGroup from './InputGroup'
-import CollapsibleSection from './CollapsibleSection'
+import React, { useState } from 'react'
+import InputGroup from './InputGroup';
 
 function EducationalInformation() {
-    const [educationalInfo, setEducationalInfo] = useState({
-        degree: '',
-        school: '',
-        date: ''
-    });
 
-    const [isCollapsed, setIsCollapsed] = useState(true)
+    const [educationList, setEducationList] = useState([])
 
-    function handleChange(e) {
-        setEducationalInfo({ ...educationalInfo, [e.target.id]: e.target.value });
-    };
+    const [educationData, setEducationData] = useState(
+        { school: "", degree: "", graduationdate: "" }
+    );
 
-    function toggleCollapse() {
-        setIsCollapsed(!isCollapsed)
+    const [isEducation, setIsEducation] = useState(true);
+
+    function handleInputChange(e) {
+        const id = e.target.id;
+        const value = e.target.value;
+
+        // create new object and update state
+        setEducationData({ ...educationData, [id]: value });
     }
 
+    function handleSubmit(e) {
+        e.preventDefault();
+        const updatedList = [...educationList, educationData];
+        setEducationList(updatedList);
+        console.log('Added Education Entry:', educationData); // Log the added formData
+        console.log('Updated Education List:', updatedList); // Log the updated educationList
+        setEducationData({
+            school: '',
+            degree: '',
+            graduationDate: ''
+        });
+        setIsEducation(!isEducation)
+    }
+
+    function addEducation() {
+        setIsEducation(true)
+    }
+
+
+
     return (
-        <div className='educational-info'>
-                <CollapsibleSection
-                    title="Educational Details"
-                    isCollapsed={isCollapsed}
-                    toggleCollapse={toggleCollapse}  
-                />
-                {
-                    !isCollapsed && (
-                        <div>
-                            <InputGroup
-                                id="degree"
-                                label="Degree"
-                                type="text"
-                                value={educationalInfo.fullname}
-                                onChange={handleChange}
-                                placeholder="Title of Study"
-                                required
-                            />
-                            <InputGroup
-                                id="school"
-                                label="School"
-                                type="text"
-                                value={educationalInfo.email}
-                                onChange={handleChange}
-                                placeholder="school"
-                                required
-                            />
-                            <InputGroup
-                                id="date"
-                                label="Date"
-                                type="date"
-                                value={educationalInfo.phone}
-                                onChange={handleChange}
-                                placeholder="Date"
-                                required
-                            />
-                        </div>
-                    )
-                }
-    
-                <div className="educationaldetails">
-                    <h2>Educational Details</h2>
-                    <p>Degree: {educationalInfo.degree}</p>
-                    <p>School: {educationalInfo.school}</p>
-                    <p>Date: {educationalInfo.date}</p>
-                </div>
-    
-            </div>
+        <div>
+            <h1>education</h1>
+            {
+                isEducation && (
+                    <div>
+                        <InputGroup 
+                            id="school"
+                            label="School"
+                            type="text"
+                            value={educationData.school}
+                            onChange={handleInputChange}
+                            placeholder="Enter School"
+                            required
+                        />
+                        <InputGroup 
+                            id="degree"
+                            label="Degree"
+                            type="text"
+                            value={educationData.degree}
+                            onChange={handleInputChange}
+                            placeholder="Enter Degree"
+                            required
+                        />
+                        <InputGroup  
+                            id="date"
+                            label="Graduation Date"
+                            type="date"
+                            value={educationData.graduationDate}
+                            onChange={handleInputChange}
+                        />
+                        <button onClick={handleSubmit}>Submit</button>
+                    </div>
+                )
+            }
+            <button onClick={addEducation}>Add Education</button>
+        </div>
     )
 }
 

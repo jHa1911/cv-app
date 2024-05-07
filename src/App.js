@@ -14,7 +14,7 @@ const App = () => {
       <PracticalInformation />
       </div>
       <div className='resume-container'>
-        Hello
+        hello
       </div>
 
     </div>
