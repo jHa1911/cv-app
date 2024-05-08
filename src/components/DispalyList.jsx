@@ -1,20 +1,21 @@
 import React from 'react'
 
-function DispalyList({educationList, educationData}) {
+
+
+function DispalyList({formList, propertyKey, onEdit}) {
+
+
+
+
     return (
         <div>
             <ul>
-                {
-                    educationList.map((education, index) => (
-                        <li key={index}>
-                            <p>School: {education.school}</p>
-                            <p>Degree: {education.degree}</p>
-                            <p>Graduation Date: {education.graduationDate}</p>
-                            <ion-icon name="create-outline"></ion-icon>
-                        </li>
-                    ))
-                    
-                }
+                {formList.map((item, index) => (
+                    <li key={index}>
+                        <p>{item[propertyKey]}</p>
+                        <button onClick={() => onEdit(index)}>Edit</button>
+                    </li>
+                ))}
             </ul>
         </div>
     )

@@ -13,20 +13,25 @@ function EducationalInformation() {
     );
 
     const [isCollapsed, setIsCollapsed] = useState(false);
-
     const [isEducation, setIsEducation] = useState(true);
+
+    const [editIndex, setEditIndex] = useState(-1)
 
     function handleInputChange(e) {
         const id = e.target.id;
         const value = e.target.value;
-
-        // create new object and update state
         setEducationData({ ...educationData, [id]: value });
     }
 
     function handleSubmit(e) {
         e.preventDefault();
-        const updatedList = [...educationList, educationData];
+        let updatedList = [...educationList];
+        if (editIndex > -1) {
+            updatedList[editIndex] = educationData;
+            setEditIndex(-1);
+        } else {
+            updatedList = [...updatedList, educationData]
+        }
         setEducationList(updatedList);
         console.log('Added Education Entry:', educationData); // Log the added formData
         console.log('Updated Education List:', updatedList); // Log the updated educationList
@@ -38,8 +43,15 @@ function EducationalInformation() {
         setIsEducation(!isEducation)
     }
 
+    function handleEdit(index) {
+        setEducationData(educationList[index]);
+        setEditIndex(index);
+        setIsEducation(false)
+    }
+
     function addEducation() {
         setIsEducation(false)
+        setEditIndex(-1)
     }
 
     function toggleCollapse() {
@@ -62,8 +74,9 @@ function EducationalInformation() {
                             isEducation ? (
                                 <>
                                     <DispalyList
-                                        educationList={educationList}
-                                        educationData={educationData} 
+                                        formList={educationList}
+                                        propertyKey="degree"
+                                        onEdit={handleEdit}
                                     />
                                     <button className='submit-btn' onClick={addEducation}><span><ion-icon name="add-outline"></ion-icon></span>  Education</button>
                                 </>
@@ -94,7 +107,9 @@ function EducationalInformation() {
                                         value={educationData.graduationDate}
                                         onChange={handleInputChange}
                                     />
-                                    <button className='btn btn-outline-primary' onClick={handleSubmit}>Submit</button>
+                                    <button className='btn btn-outline-primary' onClick={handleSubmit}>
+                                        {editIndex >= 0 ? 'Update' : 'Submit'}
+                                    </button>
                                 </div>
                             )
                         }

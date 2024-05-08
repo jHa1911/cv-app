@@ -3,6 +3,7 @@ import { useState } from 'react'
 import InputGroup from './InputGroup'
 import CollapsibleSection from './CollapsibleSection'
 import './practicalInformation.css'
+import DispalyList from './DispalyList'
 
 function PracticalInformation() {
     const [experienceData, setExperienceData] = useState({
@@ -16,6 +17,7 @@ function PracticalInformation() {
 
     const [isCollapsed, setIsCollapsed] = useState(false)
     const [isExperience, setIsExperience] = useState(true)
+    const [editIndex, setEditIndex] = useState(-1)
 
     function handleInputChange(e) {
         setExperienceData({ ...experienceData, [e.target.id]: e.target.value });
@@ -23,7 +25,13 @@ function PracticalInformation() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        const updatedList = [...experienceList, experienceData];
+        let updatedList = [...experienceList];
+        if (editIndex > -1) {
+            updatedList[editIndex] = experienceData;
+            setEditIndex(-1);
+        } else {
+            updatedList = [...updatedList, experienceData]
+        }
         setExperienceList(updatedList);
         console.log('Added Education Entry:', experienceData); // Log the added formData
         console.log('Updated Education List:', updatedList); // Log the updated experienceList
@@ -36,8 +44,15 @@ function PracticalInformation() {
         setIsExperience(!isExperience)
     }
 
+    function handleEdit(index) {
+        setExperienceData(experienceList[index]);
+        setEditIndex(index);
+        setIsExperience(false)
+    }
+
     function addExperience() {
         setIsExperience(false)
+        setEditIndex(-1)
     }
 
     function toggleCollapse() {
@@ -58,13 +73,11 @@ function PracticalInformation() {
                         {
                             isExperience ? (
                                 <>
-                                    <ul>
-                                        {experienceList.map((experienceData, index) => (
-                                            <li key={index}>
-                                                {experienceData.company}
-                                            </li>
-                                        ))}
-                                    </ul>
+                                    <DispalyList 
+                                            formList={experienceList} 
+                                            propertyKey="company"
+                                            onEdit={handleEdit}
+                                    />
                                     <button className='submit-btn' onClick={addExperience}><span><ion-icon name="add-outline"></ion-icon></span> Experience</button>
                                 </>
                             ) : (
